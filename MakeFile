@@ -1,0 +1,14 @@
+API_PROTO_FILES=$(shell find helloworld -name *.proto)
+
+
+print:
+   $(warning  $(API_PROTO_FILES))
+
+api:
+	protoc --proto_path=. \
+	       --proto_path=./google \
+ 	       --go_out=paths=source_relative:. \
+ 	       --go-http_out=paths=source_relative:. \
+ 	       --go-grpc_out=paths=source_relative:. \
+           --go-errors_out=paths=source_relative:. \
+	       $(API_PROTO_FILES)
